@@ -103,21 +103,6 @@ class Snake:
             self.pos.pop(0)
 
     # =========================
-    # CHECK WALL COLLISION
-    # =========================
-
-    def hit_wall(self):
-
-        head = self.pos[-1]
-
-        return (
-            head[0] < 0
-            or head[0] >= WIDTH // SIZE
-            or head[1] < 0
-            or head[1] >= HEIGHT // SIZE
-        )
-
-    # =========================
     # CHECK BODY COLLISION
     # =========================
 

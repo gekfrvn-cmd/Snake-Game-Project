@@ -13,6 +13,7 @@ from settings import (
 from snake import Snake
 from food import Food
 from effects import Effects
+from terrain import Terrain
 
 class Game:
 
@@ -60,6 +61,8 @@ class Game:
 
         self.game_over = False
 
+        self.terrain = Terrain()
+
         # =========================
         # TIMER
         # =========================
@@ -70,9 +73,11 @@ class Game:
         self.tmp_move_delay = MOVE_DELAY
 
         # Food không nằm trên Snake
-        self.food.spawn(self.snake.pos,self.effects.effect_pos,self.effects.gambling_pos)
-        self.effects.spawn_effect(self.snake.pos,self.effects.gambling_pos,self.food.pos)
-        self.effects.spawn_gambling(self.snake.pos,self.effects.effect_pos,self.food.pos)
+        self.terrain.draw(self.screen)
+        self.food.spawn(self.snake.pos,self.effects.effect_pos,self.effects.gambling_pos,self.terrain.wall)
+        self.effects.spawn_effect(self.snake.pos,self.effects.gambling_pos,self.food.pos,self.terrain.wall)
+        self.effects.spawn_gambling(self.snake.pos,self.effects.effect_pos,self.food.pos,self.terrain.wall)
+        
 
     # =========================
     # INPUT
@@ -191,14 +196,14 @@ class Game:
         if eating:
             if ate=="apple":
                 self.score+=1
-                self.food.spawn(self.snake.pos,self.effects.effect_pos,self.effects.gambling_pos)
+                self.food.spawn(self.snake.pos,self.effects.effect_pos,self.effects.gambling_pos, self.terrain.wall)
             else:
                 print(ate)
                 self.get_effects(ate)
                 if new_head == self.effects.effect_pos:
-                    self.effects.spawn_effect(self.snake.pos, self.effects.gambling_pos, self.food.pos)
+                    self.effects.spawn_effect(self.snake.pos, self.effects.gambling_pos, self.food.pos, self.terrain.wall)
                 else:
-                    self.effects.spawn_gambling(self.snake.pos, self.effects.effect_pos, self.food.pos)
+                    self.effects.spawn_gambling(self.snake.pos, self.effects.effect_pos, self.food.pos, self.terrain.wall)
 
         if self.current_time>=self.end_of_effect:
             self.tmp_move_delay=MOVE_DELAY
@@ -208,9 +213,9 @@ class Game:
         # COLLISION
         # =========================
 
-        if self.snake.hit_wall():
+        if self.terrain.hit_wall(self.snake.pos):
 
-             self.game_over = False
+             self.game_over = True
 
         elif self.snake.hit_body():
 
@@ -328,7 +333,7 @@ class Game:
 
         self.game_over = False
 
-        self.food.spawn(self.snake.pos,self.effects.effect_pos,self.effects.gambling_pos)
+        self.food.spawn(self.snake.pos,self.effects.effect_pos,self.effects.gambling_pos,self.terrain.wall)
 
         self.last_move_time = pygame.time.get_ticks()
 

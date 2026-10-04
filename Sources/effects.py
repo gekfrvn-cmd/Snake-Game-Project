@@ -21,9 +21,9 @@ class Effects:
 
         self.gambling_pos=[0, 0]
 
-        self.spawn_effect(snake_pos=[],gambling_pos=[],food_pos=[])
+        self.spawn_effect(snake_pos=[],gambling_pos=[],food_pos=[],terrain_pos=[])
 
-        self.spawn_gambling(snake_pos=[],effect_pos=[],food_pos=[])
+        self.spawn_gambling(snake_pos=[],effect_pos=[],food_pos=[],terrain_pos=[])
 
     def random_effect(self):
         return random.choices(self.effect,weights=[1,1],k=1)
@@ -35,7 +35,7 @@ class Effects:
     # SPAWN
     # =========================
 
-    def spawn_effect(self,snake_pos,gambling_pos,food_pos):
+    def spawn_effect(self,snake_pos,gambling_pos,food_pos,terrain_pos):
         while True:
 
             self.effect_pos = [
@@ -44,10 +44,10 @@ class Effects:
             ]
 
             # Nếu effect không nằm trên snake, gambling và food
-            if self.effect_pos not in snake_pos and self.effect_pos not in gambling_pos and self.effect_pos not in food_pos:
+            if self.effect_pos not in snake_pos and self.effect_pos not in gambling_pos and self.effect_pos not in food_pos and self.effect_pos not in terrain_pos:
                 break
 
-    def spawn_gambling(self,snake_pos,effect_pos,food_pos):
+    def spawn_gambling(self,snake_pos,effect_pos,food_pos,terrain_pos):
         while True:
             self.gambling_pos = [
                 random.randint(0, WIDTH // SIZE - 1),
@@ -55,7 +55,7 @@ class Effects:
             ]
 
             # Nếu bling không nằm trên snake, effect và food
-            if self.gambling_pos not in snake_pos and self.gambling_pos not in effect_pos and self.gambling_pos not in food_pos:
+            if self.gambling_pos not in snake_pos and self.gambling_pos not in effect_pos and self.gambling_pos not in food_pos and self.gambling_pos not in terrain_pos:
                 break
 
     def draw_effect(self,screen):
