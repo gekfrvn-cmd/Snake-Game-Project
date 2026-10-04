@@ -73,7 +73,7 @@ class Game:
         self.tmp_move_delay = MOVE_DELAY
 
         # Food không nằm trên Snake
-        self.terrain.draw(self.screen)
+
         self.food.spawn(self.snake.pos,self.effects.effect_pos,self.effects.gambling_pos,self.terrain.wall)
         self.effects.spawn_effect(self.snake.pos,self.effects.gambling_pos,self.food.pos,self.terrain.wall)
         self.effects.spawn_gambling(self.snake.pos,self.effects.effect_pos,self.food.pos,self.terrain.wall)
@@ -213,7 +213,7 @@ class Game:
         # COLLISION
         # =========================
 
-        if self.terrain.hit_wall(self.snake.pos):
+        if self.terrain.hit_wall(self.snake.pos[-1]):
 
              self.game_over = True
 
@@ -262,7 +262,6 @@ class Game:
         # =========================
         # DRAW OBJECTS
         # =========================
-
         self.snake.draw(self.screen)
 
         self.food.draw(self.screen)
@@ -270,6 +269,8 @@ class Game:
         self.effects.draw_effect(self.screen)
 
         self.effects.draw_gambling(self.screen)
+
+        self.terrain.draw(self.screen)
         # =========================
         # SCORE
         # =========================
