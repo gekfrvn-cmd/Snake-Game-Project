@@ -33,5 +33,8 @@ class Terrain:
             )                
 
     def hit_wall(self,x):
-        return x in self.wall
+        for i in x:
+            if i in self.wall:
+                return True
+        return False
     
