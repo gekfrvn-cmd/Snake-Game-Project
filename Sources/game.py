@@ -139,7 +139,7 @@ class Game:
             self.game_over=True
         elif effect_name==["shorten_tail_50%"]:
             if len(self.snake.pos)!=1:
-                self.snake.pos = self.snake.pos[:(len(self.snake.pos) // 2)]
+                self.snake.pos = self.snake.pos[(len(self.snake.pos) // 2):-1]
         elif effect_name==["become_1_pixel"]:
             self.snake.pos=[self.snake.pos[0]]
         elif effect_name==["lost_all_points"]:
