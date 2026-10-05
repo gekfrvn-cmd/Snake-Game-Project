@@ -213,7 +213,7 @@ class Game:
         # COLLISION
         # =========================
 
-        if self.terrain.hit_wall(self.snake.pos[-1]):
+        if self.terrain.hit_wall(new_head):
 
              self.game_over = True
 
