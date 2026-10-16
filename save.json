@@ -1,0 +1,14 @@
+{
+  "difficulty": 2,
+  "volume": 7,
+  "music": 5,
+  "best_level": 2,
+  "skin": 0,
+  "grid": false,
+  "particles": true,
+  "shake": true,
+  "fullscreen": true,
+  "high_score": 5,
+  "lighting": true,
+  "crt": false
+}
