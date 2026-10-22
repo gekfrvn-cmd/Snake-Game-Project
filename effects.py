@@ -21,7 +21,7 @@ class Effects:
         return random.choices(self.effect, weights=[1, 1], k=1)
 
     def random_gambling(self):
-        return random.choices(self.gambling, weights=[5, 1, 11, 60, 2, 1, 20], k=1)
+        return random.choices(self.gambling, weights=[14, 1, 12, 50, 2, 0.5, 20.5], k=1)
 
     def spawn_effect(self, snake_pos, gambling_pos, food_pos, terrain_pos):
         while True:
