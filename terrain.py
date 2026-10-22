@@ -11,7 +11,7 @@ from settings import (
 
 class Terrain:
 
-    def __init__(self):
+    def __init__(self, enabled=True):
         self.wall = list()
 
         # Giữ nguyên bố cục terrain ban đầu, chỉ đổi kiểu hiển thị từng ô.
@@ -22,10 +22,12 @@ class Terrain:
             (40, 8, 43, 30)
         ]
 
-        for x1, y1, x2, y2 in walls:
-            for x in range(x1, x2 + 1):
-                for y in range(y1, y2):
-                    self.wall.append([x, y])
+        # enabled=False (tắt "Tường" trong Cài đặt) -> không có tường nào.
+        if enabled:
+            for x1, y1, x2, y2 in walls:
+                for x in range(x1, x2 + 1):
+                    for y in range(y1, y2):
+                        self.wall.append([x, y])
 
         self._wall_set = {tuple(cell) for cell in self.wall}
         self._surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
